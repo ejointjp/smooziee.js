@@ -8,7 +8,8 @@
       otherPageScroll: true, //他ページへのリンクの際のスクロール
       scrollKey: 'scroll_id', //ハッシュタグの代わりに使用するクエリのキー
       speed: 1000, //スクロール開始から終了までの時間
-      urlParam: 'hash' //URLの書き換え hash, none, scrollKey
+      urlHistory: 'replace', //URL書き換え時にhistoryを追加するか上書きするか
+      urlParam: 'hash' //URLの書き換え hash, none, default
     }, options);
 
     var scrollVal = '', //URLに含まれるスクロールに使われる値
@@ -47,7 +48,14 @@
       }
 
       //URLを書き換える
-      window.history.pushState(null, null, replaceUrl);
+      if(replaceUrl !== null){
+        if(options.urlHistory === 'push'){
+          window.history.pushState(null, null, replaceUrl);
+
+        } else {
+          window.history.replaceState(null, null, replaceUrl);
+        }
+      }
     };
 
     //文字列をハッシュ化
