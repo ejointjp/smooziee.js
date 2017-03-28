@@ -19,4 +19,4 @@ permalink: /about/
 
 ## サンプル
 
-<a class="btn btn--primary" href="{{ '/sample-1.html' | relative_url }}">sample</a>
+<a class="btn btn--primary" href="{{ '/sample/' | relative_url }}">sample</a>
