@@ -36,7 +36,8 @@ $(window).on('load', function()){
     otherPageScroll: true, //他ページへのリンクの際のスクロール
     scrollKey: 'scroll_id', //ハッシュタグの代わりに使用するクエリのキー
     speed: 1000, //スクロール開始から終了までの時間
-    urlParam: 'hash' //URLの書き換え hash, none, scrollKey
+    urlHistory: 'replace', //URL書き換え時にhistoryを追加するか上書きするか
+    urlParam: 'hash' //URLの書き換え hash, none, default
   });
 });
 {% endhighlight %}
@@ -70,10 +71,23 @@ $(window).on('load', function()){
     <td>スクロール開始から終了までの時間（ms）</td>
   </tr>
   <tr>
+    <th>urlHistory</th>
+    <td>string （'replace', 'push'）</td>
+    <td>
+      <p>URLの書き換えが発生したときに、URLの履歴（History（をどう扱うか指定します。</p>
+      <dl>
+        <dt><code>replace</code></dt>
+        <dd>書き換え前の履歴を現在の履歴で上書きします。</dd>
+        <dt><code>push</code></dt>
+        <dd>書き換え前の履歴の後に、現在の履歴を追加します。</dd>
+      </dl>
+    </td>
+  </tr>
+  <tr>
     <th>urlParam</th>
     <td>string （'hash', 'none', 'default'）</td>
     <td>
-      <p>ハッシュタグのついたaタグをクリックした時に、URLをどう変更するかを指定します。</p>
+      <p>ハッシュタグのついたaタグをクリックした時に、URLをどう書き換えるかを指定します。</p>
       <dl>
         <dt><code>hash</code></dt>
         <dd>通常のページ内リンクと同じくハッシュタグを付与します。<code>http://example.com/#link</code></dd>
