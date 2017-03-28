@@ -4,7 +4,7 @@
 
     options = $.extend({
       ignore: '.no-scroll', //スクロールを除外するクラス
-      offset: -20, //移動先のオフセット
+      offset: -24, //移動先のオフセット
       otherPageScroll: true, //他ページへのリンクの際のスクロール
       scrollKey: 'scroll_id', //ハッシュタグの代わりに使用するクエリのキー
       speed: 1000, //スクロール開始から終了までの時間
