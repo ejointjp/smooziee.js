@@ -1,0 +1,19 @@
+{% assign default_sidebar_src = 'sidebar.html' %}
+
+{% if site.default_sidebar and site.default_sidebar != 'default' and site.default_sidebar != default_sidebar_src %}
+  {% capture sidebar_src %}
+    sidebar-{{ site.default_sidebar | remove: 'sidebar-' | remove: '.html' }}.html
+  {% endcapture %}
+{% else %}
+  {% capture sidebar_src %}
+    {{ default_sidebar_src }}
+  {% endcapture %}
+{% endif %}
+
+{% if page.sidebar and page.sidebar != 'default' %}
+  {% capture sidebar_src %}
+    sidebar-{{ page.sidebar | remove: 'sidebar-' | remove: '.html' | remove: default_sidebar_src }}.html
+  {% endcapture %}
+{% endif %}
+
+{% capture sidebar_src %}{{ sidebar_src | strip }}{% endcapture %}

@@ -1,0 +1,40 @@
+@charset 'UTF-8';
+
+$panel-border: $border !default;
+$panel-radius: $radius !default;
+$panel-background: $background !default;
+
+.panel{
+
+  $selector: &;
+  margin-bottom: vr();
+  border: $panel-border;
+  border-radius: $panel-radius;
+  padding: text-padding(-1);
+
+   &__header{
+    border-bottom: $panel-border;
+    padding-bottom: text-padding(-1);
+   }
+
+   &__title{
+    margin: 0;
+    @include vr-font();
+   }
+
+   &__body{
+
+    #{$selector}__header + & {
+      padding-top: text-padding();
+    }
+
+    &:not(:last-child){
+      padding-bottom: text-padding();
+    }
+   }
+
+  &__footer{
+    border-top: $panel-border;
+    padding-top: text-padding(-1);
+  }
+}

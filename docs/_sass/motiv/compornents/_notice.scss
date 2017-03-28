@@ -1,0 +1,21 @@
+@charset 'UTF-8';
+$notice-background: $background !default;
+$notice-border-style: $border-style !default;
+$notice-border-width: $border-width !default;
+$notice-border-color: $border-color !default;
+$notice-border: $border;
+$notice-radius: $radius !default;
+
+.notice{
+  background: $notice-background;
+  border:  $notice-border;
+  padding: text-padding($notice-border-width * -1);
+  margin-bottom: vr();
+
+  border-radius: $notice-radius;
+
+  &--sm{
+    @include vr-font(sm);
+    padding: text-padding-sm($notice-border-width * -1) text-padding($notice-border-width * -1);
+  }
+}

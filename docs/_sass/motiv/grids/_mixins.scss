@@ -1,0 +1,105 @@
+@charset 'UTF-8';
+
+@mixin col-width($i, $grid-columns, $gutter){
+  width: col-width($i, $grid-columns, $gutter);
+}
+
+//カラム数($grid-columns)に応じてスタイルを生成。引数$gutterはgutterのサイズ
+@mixin col-loop($gutter: 0){
+  @for $i from 1 through $grid-columns {
+
+    @if $grid-columns / $i == 3 {
+      &-third, &-#{$i}{
+        @include col-width($i, $grid-columns, $gutter);
+      }
+
+    } @else if $grid-columns / $i == 2 {
+      &-half, &-#{$i}{
+        @include col-width($i, $grid-columns, $gutter);
+      }
+
+    } @else if $grid-columns == $i {
+      &-full, &-#{$i}{
+        @include col-width($i, $grid-columns, $gutter);
+      }
+
+    } @else {
+      &-#{$i}{
+        @include col-width($i, $grid-columns, $gutter);
+      }
+    }
+  }
+}
+
+@mixin order-loop(){
+  @for $i from 1 through $grid-columns {
+    &-#{$i}{
+      order: $i;
+    }
+  }
+}
+
+//gutter設定用のベース
+@mixin gutter($margin){
+  margin-top: $margin;
+  margin-left: $margin;
+}
+
+//gutter不要の場合相殺する
+@mixin nogutter(){
+  @include gutter(0);
+}
+
+//row用のgutterを設定
+@mixin row-gutter(){
+  @include gutter(-$grid-gutter);
+}
+
+//col用のgutterを設定
+@mixin col-gutter(){
+  @include gutter($grid-gutter);
+}
+
+//colのクラス名からスタイルを生成する。
+@mixin col-style-base($size){
+  $classname: selector('.col', $size);
+  #{$classname}{
+    flex: 1;
+    @include col-loop($grid-gutter);
+
+    .row-nogutter > &{
+      @include col-loop();
+    }
+  }
+}
+
+//colのクラス名とスクリーンサイズを指定してスタイルを生成する
+@mixin col-style($size){
+  @include mq($size){
+    @include col-style-base($size);
+  }
+}
+
+//orderのクラス名からスタイルを生成する。
+@mixin order-style-base($size){
+  $classname: selector('.order', $size);
+  #{$classname}{
+
+    &-first{
+      order: -1;
+    }
+
+    @include order-loop();
+
+    &-last{
+      order: $grid-columns + 1;
+    }
+  }
+}
+
+//orderのクラス名とスクリーンサイズを指定してスタイルを生成する
+@mixin order-style($size){
+  @include mq($size){
+    @include order-style-base($size);
+  }
+}

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head prefix:og="http://ogp.me/ns#">
+  <meta charset="UTF-8">
+  <title>{% if page.title %}{{ page.title | escape }} | {{ site.title | escape }}{% else %}{{ site.title | escape }} | {{ site.description | escape }}{% endif %}</title>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <!-- Google Fonts -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700">
+  <!-- TocJS -->
+  <link rel="stylesheet" href="https://cdn.rawgit.com/ejointjp/tocjs/43e63901/dist/tocjs.min.css">
+  <!-- Default CSS -->
+  <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+  <meta name="viewport" content="width=device-width">
+  <meta name="description" content="{{ page.excerpt | default: site.description | strip_html | normalize_whitespace | truncate: 160 | escape }}">
+  <link rel="canonical" href="{{ page.url | remove:'index.html' | absolute_url }}">
+  {% feed_meta %}
+  {% if site.google_analytics_tracking_id %}
+    {% include theme/analytics-tracking.html %}
+  {% endif %}
+</head>
+<body>
+
+<header class="header">
+  <nav id="nav" class="nav">
+    <div class="container nav__container">
+      <div class="nav__brand"><a class="nav__title" href="{{ '/' | relative_url }}">{{ site.title }}</a></div>
+      <div id="nav__btn" class="nav__btn"><i class="fa fa-bars"></i></div>
+      <ul id="nav__list" class="nav__list">
+        {% if site.display_home_in_menu %}
+          <li class="nav__item"><a href="{{ '/' | relative_url }}">Home</a></li>
+        {% endif %}
+        {% for page in site.pages %}
+          {% if page.layout == 'page' %}
+            <li class="nav__item"><a href="{{ page.url | relative_url }}">{{ page.title }}</a></li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+    </div>
+  </nav>
+</header>
+
+
+{{ content }}
+
+
+<footer class="footer">
+  {% if page.template == '2-columns' %}
+  <div class="container container footer__container">
+  {% else %}
+  <div class="container container--sm footer__container">
+  {% endif %}
+    <p class="copyright"><small>&copy; 2017 {{ site.author.name }}</small></p>
+
+    <div class="social-link">
+      {% if site.author.github %}
+        <p class="social-link__item">
+          <a href="https://github.com/{{ site.author.github }}"><i class="fa fa-github"></i></a>
+        </p>
+      {% endif %}
+      {% if site.author.twitter %}
+        <p class="social-link__item">
+          <a href="https://twitter.com/{{ site.author.twitter }}"><i class="fa fa-twitter"></i></a>
+        </p>
+      {% endif %}
+    </div>
+  </div><!--container-->
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<!-- TocJS -->
+<script src="https://cdn.rawgit.com/ejointjp/tocjs/43e63901/dist/tocjs.min.js"></script>
+<!-- smooziee.js -->
+<script src="https://cdn.rawgit.com/ejointjp/smooziee.js/9b5b83bb/dist/smooziee.min.js"></script>
+<script src="{{ 'assets/js/jfgp-settings.js' | relative_url }}"></script>
+<script src="{{ 'assets/js/reshape-pre.js' | relative_url }}"></script>
+<!-- <script src="{{ 'assets/js/motiv.min.js' | relative_url }}"></script> -->
+
+</body>
+</html>

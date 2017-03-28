@@ -1,0 +1,75 @@
+@charset 'UTF-8';
+
+$code-inline-color: #e95a54 !default;
+$code-inline-background: #fce6e5 !default;
+$code-inline-border: null !default;
+$code-inline-radius: $radius !default;
+
+$code-color: null !default;
+$code-background: $background !default;
+$code-border: $border !default;
+$code-radius: $radius !default;
+$code-font-size: 14 !default;
+$code-terminal-background: $color-atom-background !default;
+$code-terminal-color: #e8e8e8 !default;
+
+%code{
+
+  @include vr-font(ms(-1, $ratio:$perfect-fourth), $unit: em);
+  font-family: $font-mono;
+  border-radius: 3px;
+  padding: {
+    right: em(9);
+    left: em(9);
+  }
+  display: inline-block;
+  word-wrap: break-word;
+  max-width: 100%;
+  position: relative;
+  top: -1px;
+}
+
+code,
+.code{
+  @extend %code;
+
+  border: $code-inline-border;
+  border-radius: $code-inline-radius;
+  background: $code-inline-background;
+  color: $code-inline-color;
+}
+
+kbd{
+  @extend %code;
+  background: $code-terminal-background;
+  color: $code-terminal-color;
+
+  & > &{
+    padding: 0;
+    font-size: 1em;
+  }
+}
+
+
+pre{
+  margin-top: 0;
+  margin-bottom: vr();
+  font-family: $font-mono;
+  padding: text-padding();
+  border-radius: $code-radius;
+  background: $code-background;
+  color: $code-color;
+  overflow-x: scroll;
+  @include vr-font($code-font-size);
+
+  &.terminal{
+    background-color: $code-terminal-background;
+    color: $code-terminal-color;
+    color: white;
+    color: #ddd;
+  }
+}
+
+samp{
+  font-family: $font-mono;
+}

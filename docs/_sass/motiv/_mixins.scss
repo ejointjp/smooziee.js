@@ -1,0 +1,383 @@
+@charset 'UTF-8';
+
+@mixin mq($vals...){
+
+  $length: length($vals);
+
+  @if $length == 2 {
+    $first: nth($vals, 1);
+    $last: nth($vals, 2);
+
+    @if $last == 'max' or $last == 'max-width' {
+
+      @if $first == 0 or $first == nth(map-keys($screen-size), 1) or screen-size($first) == 0{
+      }
+
+      @else {
+        $max: screen-size($first, -1);
+
+        @media #{queries(0, $max)}{
+          @content;
+        }
+      }
+    }
+
+    @else {
+      $min: screen-size($first);
+      $max: screen-size($last, -1);
+
+      @media #{queries($min, $max)}{
+        @content;
+      }
+    }
+  }
+
+  @else if $length == 1 {
+    $val: nth($vals, 1);
+
+    @if $val == 'max' or $val == 'max-width' {
+      $max: screen-size($main-breakpoint, -1);
+
+      @media #{queries(0, $max)}{
+        @content;
+      }
+    }
+
+    @else if $val == 0 or $val == nth(map-keys($screen-size), 1) or screen-size($val) == 0{
+      @content;
+    }
+
+    @else {
+      $min: screen-size($val);
+      @media #{queries($min)}{
+        @content;
+      }
+    }
+  }
+
+  @else if $length == 0 {
+    $min: screen-size();
+    @media #{queries($min)}{
+      @content;
+    }
+  }
+
+  @else {
+    @content;
+  }
+}
+
+@mixin responsive-width($width: auto, $breakpoint: $main-breakpoint){
+
+  width: 100%;
+  @include mq($breakpoint){
+    width: $width;
+  }
+}
+
+//Fonts
+@mixin font-size($val: $base-font-size, $absolute: true, $unit: rem){
+
+  @if($absolute == false){
+    $val: $base-font-size + $val;
+  }
+
+  $val: font-size-conversion($val);
+
+  @if $val < 10 {
+    $val: 10;
+  }
+
+  @if $val != 0{
+
+    @if $unit == em {
+      font-size: em($val);
+    }
+
+    @else if $unit == px {
+      font-size: strip-units($val) * 1px;
+    }
+
+    @else {
+      font-size: rem($val);
+    }
+  }
+}
+
+
+@mixin line-height($font-size: $base-font-size, $line: 1, $unit: rem, $min_height: $minor-third){
+
+  $font-size: font-size-conversion($font-size);
+
+  @if $font-size < 10 {
+    $font-size: 10;
+  }
+
+  $height: $vertical-rhythm-base / $font-size;
+
+  //line-heightの値が1.15未満の場合､1列分の高さを加える
+  @while $height < $min_height {
+    $line: $line + 1;
+    $height: ($vertical-rhythm-base / $font-size) * $line;
+  }
+
+  @if $unit == none {
+    line-height: strip-units($height);
+  }
+
+  @else if $unit == percent {
+    $height: strip-units($height) * 100%;
+    line-height: $height;
+  }
+
+  @else {
+    $height: $line * $vertical-rhythm-base;
+
+    @if $unit == px {
+      line-height: strip-units($height) * 1px;
+    }
+
+    @else if $unit == em {
+      line-height: em($height);
+    }
+
+    @else {
+      line-height: rem($height);
+    }
+  }
+}
+
+
+@mixin vr-font($font-size: $base-font-size, $line: 1, $font_unit: rem, $line_height_unit: rem, $unit: auto, $min_height: $minor-third){
+
+  @if $unit != auto {
+    $font_unit: $unit;
+    $line_height_unit: $unit;
+  }
+
+  @include font-size($font-size, $unit:$font_unit);
+  @include line-height($font-size, $line, $line_height_unit, $min_height: $min_height);
+}
+
+@mixin responsive-vr($sizes, $prop: margin, $position: false){
+
+  $selectors: ();
+  $positions: ();
+
+  @if $position == y {
+    $positions: top, bottom;
+  }
+
+  @else if $position == x {
+    $positions: right, left;
+  }
+
+  @else {
+    $positions: $position;
+  }
+
+  @each $position in $positions {
+    $selectors: append($selectors, tie($prop, $position));
+  }
+
+  @if type-of($sizes) == list {
+    @each $selector in $selectors {
+      #{$selector}: vr(nth($sizes, 1));
+
+      @include mq(){
+        #{$selector}: vr(nth($sizes, 2));
+      }
+    }
+  }
+
+  @else if type-of($sizes) == map {
+    @each $key, $val in $sizes {
+      // @if screen-size($key) == 0 {
+      //   @each $selector in $selectors {
+      //     #{$selector}: vr($val);
+      //   }
+      // }
+      //
+      // @else {
+        @each $selector in $selectors {
+          @include mq($key){
+            #{$selector}: vr($val);
+          }
+        }
+      // }
+    }
+  }
+}
+
+
+@mixin pad($size: 1){
+  padding-top: $pad * $size;
+  padding-bottom: $pad * $size;
+}
+
+@mixin side-gutter($breakpoint: $main-breakpoint, $side: all){
+
+  @if $side == right {
+    padding-right: $side-gutter;
+  }
+  @if $side == left {
+    padding-left: $side-gutter;
+  }
+  @if $side == all {
+    padding-right: $side-gutter;
+    padding-left: $side-gutter;
+  }
+
+  @include mq($breakpoint){
+    @if $side == right {
+      padding-right: $side-gutter-lg;
+    }
+    @if $side == left {
+      padding-left: $side-gutter-lg;
+    }
+    @if $side == all {
+      padding-right: $side-gutter-lg;
+      padding-left: $side-gutter-lg;
+    }
+  }
+}
+
+@mixin full-width($breakpoint: $main-breakpoint){
+  @include margin(null $side-gutter * -1);
+  margin-right: $side-gutter * -1;
+  margin-left: $side-gutter * -1;
+
+  @include q($breakpoint){
+    margin-right: auto;
+    margin-left: auto;
+  }
+}
+
+@mixin circle($size: null){
+  @include square($size);
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+@mixin square($size){
+  width: $size;
+  height: $size;
+}
+
+//Reset
+@mixin reset($type: null){
+
+  padding: 0;
+  margin: 0;
+
+  @if ($type == 'list'){
+
+    ul,
+    li{
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+  }
+}
+
+
+@mixin font-awesome($unicode: null, $position: before){
+
+  &::#{$position}{
+    content: $unicode;
+    font-family: FontAwesome;
+  }
+}
+
+@mixin border-top-radius($radius: $radius){
+  border-top-left-radius: $radius;
+  border-top-right-radius: $radius;
+}
+
+@mixin border-right-radius($radius: $radius){
+  border-top-right-radius: $radius;
+  border-bottom-right-radius: $radius;
+}
+
+@mixin border-bottom-radius($radius: $radius){
+  border-bottom-right-radius: $radius;
+  border-bottom-left-radius: $radius;
+}
+
+@mixin border-left-radius($radius: $radius){
+  border-top-left-radius: $radius;
+  border-bottom-left-radius: $radius;
+}
+
+
+//$type: text or label or label-inverse
+@mixin state($state: default, $type: text){
+
+  @if $type == label {
+    background: color($state, base);
+  }
+
+  @else if $type == 'label-inverse' {
+    color: color($state, base);
+  }
+
+  @else {
+    color: color($state, font);
+    border-color: color($state, border);
+    background: color($state, background);
+  }
+}
+
+@mixin all-state($type: text, $selector: &){
+  @each $key, $val in $states {
+    &#{$selector}--#{$key}{
+      @include state($key, $type);
+    }
+  }
+}
+
+@mixin visible($screen-size: $main-breakpoint, $upper: false){
+
+  $after: screen-size-after($screen-size);
+
+  @if $upper == false {
+    @include mq($screen-size, max){
+      display: none;
+    }
+    @include mq($after){
+      display: none;
+    }
+  }
+
+  @else {
+    @include mq($screen-size, max){
+      display: none;
+    }
+  }
+}
+
+@mixin hidden($screen-size: $main-breakpoint, $upper: false){
+
+  $after: screen-size-after($screen-size);
+
+  @if $upper == false {
+    @include mq($screen-size, $after){
+      display: none;
+    }
+  }
+
+  @else {
+    @include mq($screen-size){
+      display: none;
+    }
+  }
+}
+
+@mixin clearfix(){
+  &::after{
+    content: "";
+    display: block;
+    clear: both;
+  }
+}

@@ -1,0 +1,89 @@
+---
+layout: page
+title: インストールと設定
+permalink: /install-and-settings/
+---
+
+<h2>インストール</h2>
+
+<p>任意の場所に､Githubよりリポジトリをクローン､またはZIPをダウンロードし解凍します｡</p>
+<p><a class="btn btn--primary" href="https://github.com/ejointjp/smooziee.js/">Github</a></p>
+
+<p><code>smooziee.js</code> を jQueryの後に読み込みます。</p>
+
+{% highlight html %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="path/to/smooziee.js"></script>
+{% endhighlight %}
+
+<p><code>smooziee</code> を実行します。window on load にした方がよいかもしれません。</p>
+
+{% highlight js %}
+$(window).on('load', function()){
+  $.smooziee();
+});
+{% endhighlight %}
+
+<h2>オプション</h2>
+
+<p>オプションについては以下のとおりです。</p>
+
+{% highlight js %}
+$(window).on('load', function()){
+  $.smooziee({
+    ignore: '.no-scroll', //スクロールを除外するクラス
+    offset: -20, //移動先のオフセット
+    otherPageScroll: true, //他ページへのリンクの際のスクロール
+    scrollKey: 'scroll_id', //ハッシュタグの代わりに使用するクエリのキー
+    speed: 1000, //スクロール開始から終了までの時間
+    urlParam: 'hash' //URLの書き換え hash, none, scrollKey
+  });
+});
+{% endhighlight %}
+
+<table class="table table--bordered table--striped table--responsive">
+
+<tbody>
+  <tr>
+    <th>ignore</th>
+    <td>cssのセレクタ（クラス名）</td>
+    <td>指定したクラス名がついたaタグをクリックしてもスムーススクロールが発生しません。</td>
+  </tr>
+  <tr>
+    <th>offset</th>
+    <td>int</td>
+    <td>ターゲット要素のY座標にこの値を足したY座標へスクロールします。</td>
+  </tr>
+  <tr>
+    <th>otherPageScroll</th>
+    <td>bool</td>
+    <td>サイト内の他ページへリンクした際のスムーススクロールを有効・無効にする</td>
+  </tr>
+  <tr>
+    <th>scrollKey</th>
+    <td>string</td>
+    <td>他ページへのリンクの際に、ハッシュタグに代わって使われるクエリのキーです。デフォルトでは、 <code>http://example.com/#link</code> へのリンクは <code>http://example.com/?scroll_id=link</code> に変換されます。</td>
+  </tr>
+  <tr>
+    <th>speed</th>
+    <td>int</td>
+    <td>スクロール開始から終了までの時間（ms）</td>
+  </tr>
+  <tr>
+    <th>urlParam</th>
+    <td>string （'hash', 'none', 'default'）</td>
+    <td>
+      <p>ハッシュタグのついたaタグをクリックした時に、URLをどう変更するかを指定します。</p>
+      <dl>
+        <dt><code>hash</code></dt>
+        <dd>ハッシュタグを付与します。<code>http://example.com/#link</code></dd>
+        <dt><code>none</code></dt>
+        <dd>何も付与しません。<code>http://example.com</code></dd>
+        <dt><code>default</code></dt>
+        <dd>他ページへのリンクをした際に、ハッシュタグが変換されますが、そのままの状態となります。<code>http://example.com/?scroll_id=link</code></dd>
+        <dd>また、ページ内リンクの際は何も付与しません。</dd>
+      </dl>
+    </td>
+  </tr>
+</tbody>
+</table>

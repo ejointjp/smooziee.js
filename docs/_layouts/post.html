@@ -1,0 +1,49 @@
+---
+layout: default
+---
+
+{% include theme/sidebar-src-resolution.html %}
+
+<div class="contents page">
+  {% if page.template == '2-columns' %}
+    <div class="container">
+      {% include theme/page-header.html %}
+
+      <div class="page__body">
+        <div class="row">
+
+          <div class="col-8 main toc-src order-first">
+            {{ content }}
+          </div>
+
+          <div class="col-4 sidebar order-xs-first">
+            {% include {{ sidebar_src }} %}
+          </div>
+
+        </div><!--row-->
+      </div><!--page-body-->
+
+      <div class="page__footer">
+        {% include theme/pager.html %}
+      </div><!--page__footer-->
+
+    </div><!--container-->
+
+  {% else %}
+
+    <div class="container container--sm">
+      {% include theme/page-header.html %}
+
+      <div class="page__body">
+        {{ content }}
+      </div><!--page__body-->
+
+      <div class="page__footer">
+        {% include theme/pager.html %}
+      </div><!--page__footer-->
+
+    </div><!--container-->
+
+  {% endif %}
+
+</div><!--page-->

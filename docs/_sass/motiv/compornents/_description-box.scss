@@ -1,0 +1,152 @@
+@charset 'UTF-8';
+
+$dl-border-style: $border-style !default;
+$dl-border-width: $border-width !default;
+$dl-border-color: $border-color !default;
+$dl-border: $dl-border-style $dl-border-width $dl-border-color;
+$dl-breakpoint: $main-breakpoint !default;
+$dl-radius: $radius !default;
+
+@mixin dl-box(){
+
+  > dt{
+
+    border: {
+      right: $dl-border;
+      left: $dl-border;
+    }
+    padding: text-padding() text-padding($dl-border-width * -1) text-padding($dl-border-width * -1);
+
+    &:first-child{
+      border-top: $dl-border;
+      @include border-top-radius($dl-radius);
+    }
+
+    + dt{
+      padding-top: 0;
+      margin-top: 0;
+    }
+
+    + dd{
+      margin-top: 0;
+      position: relative;
+
+      &::before{
+        content: '';
+        position: absolute;
+        top: 0;
+        border-top: $dl-border;
+        display: block;
+        width: calc(100% - #{text-padding($dl-border-width * -1)} * 2);
+      }
+    }
+  }
+
+  > dd{
+
+    border: {
+      right: $dl-border;
+      left: $dl-border;
+    }
+    padding: text-padding() text-padding($dl-border-width * -1) 0;
+
+    &:last-child{
+      border-bottom: $dl-border;
+      @include border-bottom-radius($dl-radius);
+      padding-bottom: text-padding();
+    }
+
+    + dd{
+      padding-top: text-padding();
+      margin-top: 0;
+    }
+
+    + dt{
+      border-top: $dl-border;
+      @include border-top-radius($dl-radius);
+      margin-top: vr(1.5);
+      position: relative;
+
+      &::before{
+        content: '';
+        width: calc(100% + #{$dl-border-width} * 2);
+        height: text-padding();
+        display: block;
+        position: absolute;
+        top: vr(1.5, $dl-border-width) * -1;
+        left: $dl-border-width * -1;
+        border: $dl-border {
+          top: none;
+        }
+        @include border-bottom-radius($dl-radius);
+      }
+    }
+  }
+}
+
+@mixin dl-horizontal(){
+  @include mq($dl-breakpoint){
+
+    @include clearfix();
+
+    > dt{
+      float: left;
+      clear: left;
+      width: 30%;
+      margin: {
+        top: vr();
+        bottom: 0;
+      }
+      padding-right: text-padding($dl-border-width * -1);
+
+      &:first-child{
+        margin-top: 0;
+      }
+
+      + dt{
+        margin-top: vr(0.5);
+      }
+    }
+
+    > dd{
+      border-left: $border;
+      margin: {
+        top: vr();
+        bottom: 0;
+        left:  30%;
+      }
+      padding-left: text-padding();
+
+      &:first-of-type{
+        margin-top: 0;
+      }
+
+      + dd{
+        margin-top: 0;
+        padding-top: vr();
+      }
+    }
+  }
+}
+
+.dl-box{
+  @include dl-box();
+}
+
+.dl-horizontal{
+  @include dl-horizontal();
+}
+
+.dl-box-horizontal{
+
+  @include mq($dl-breakpoint, max){
+    @include dl-box();
+  }
+
+  @include mq($dl-breakpoint){
+    border: $dl-border;
+    border-radius: $radius;
+    padding: text-padding($dl-border-width * -1);
+  }
+  @include dl-horizontal();
+}

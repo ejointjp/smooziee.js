@@ -1,0 +1,18 @@
+@charset 'UTF-8';
+
+@function size-conversion($size: md, $map: $size-alias){
+
+  @if map-has-key($map, $size){
+    $size: map-get($map, $size);
+  }
+
+  @return $size;
+}
+
+@function font-size-conversion($val){
+  @if map-has-key($size-alias, $val){
+    $val: ms($val, $base-font-size);
+  }
+
+  @return $val;
+}

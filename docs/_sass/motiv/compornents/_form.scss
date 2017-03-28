@@ -1,0 +1,194 @@
+@charset 'UTF-8';
+
+$input-border: 1px solid #ccc !default;
+$input-border-hover-color: $color-primary !default;
+$input-radius: $radius !default;
+$input-width: rem(320) !default;
+$input-width-narrow: rem(100) !default;
+$input-breakpoint: $main-breakpoint !default;
+
+$input-list:
+  // '[type=color]',
+  '[type=date]',
+  '[type=datetime]',
+  '[type=datetime-local]',
+  '[type=email]',
+  // '[type=image]',
+  '[type=month]',
+  '[type=number]',
+  '[type=password]',
+  '[type=range]',
+  '[type=search]',
+  '[type=tel]',
+  '[type=text]',
+  '[type=time]',
+  '[type=url]',
+  '[type=week]' !default;
+
+$all-inputs: assign-inputs($input-list);
+
+// $btn-list:
+//   '[type=submit]',
+//   'button' !default;
+//
+// $all-btns: assign-inputs($btn-list);
+
+@mixin input-text(){
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: $input-border;
+  border-radius: $input-radius;
+  padding-left: text-padding(-1);
+  padding-right: text-padding(-1);
+  max-width: 100%;
+  width: 100%;
+}
+
+@mixin input-text-oneline(){
+  @include input-text();
+  height: vr(1.5);
+
+  @include mq($input-breakpoint){
+    width: $input-width;
+    height: vr(2);
+  }
+
+}
+
+@mixin form-responsive(){
+  @include mq($input-breakpoint){
+    width: auto;
+  }
+}
+
+select{
+  @include input-text-oneline();
+  background: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMCIgaGVpZ2h0PSIxNSIgdmlld0JveD0iMCAwIDEwIDE1Ij48ZyBmaWxsPSIjNDQ0Ij48cGF0aCBkPSJNMCA2bDUtNiA1IDZNMTAgOWwtNSA2LTUtNiIvPjwvZz48L3N2Zz4=) no-repeat right text-padding() center;
+  background-color: white;
+  background-size: 10px 15px;
+  padding-right: text-padding(-1) * 2 + rem(10);
+  @include form-responsive();
+}
+
+textarea{
+  @include input-text();
+  @include line-height();
+  padding: text-padding(-1);
+  width: 100% !important;
+}
+
+fieldset{
+  border-radius: $input-radius;
+  padding: vr() vr() vr(1, -1) vr();
+  margin-bottom: vr();
+  margin-left: 0;
+  margin-right: 0;
+
+  @include mq($input-breakpoint){
+    padding: vr(2) vr(2) vr(2, -1) vr(2);
+  }
+}
+
+legend{
+  padding-right: 1em;
+  padding-left: 1em;
+  margin-left: -1em;
+  font-weight: bold;
+}
+
+#{$all-inputs}{
+  @include input-text-oneline();
+}
+
+[type=radio],
+[type=checkbox]{
+  position: relative;
+  top: -2px;
+  margin-right: rem(5);
+}
+
+.form{
+
+  &__item{
+    margin-bottom: vr(0.5);
+    display: block;
+
+    &:last-child{
+      margin-bottom: 0;
+    }
+  }
+
+  &__label{
+    display: block;
+    font-weight: bold;
+    margin-bottom: vr(0.5);
+  }
+
+  &__select{
+    margin-right: 1em;
+    display: inline-block;
+
+    &:last-child{
+      margin-right: 0;
+    }
+  }
+}
+
+.formparts{
+
+  &--responsive{
+    width: 100%;
+
+    @include mq($input-breakpoint){
+      width: auto;
+    }
+  }
+  &--narrow{
+    width: $input-width-narrow !important;
+  }
+
+  @include mq($input-breakpoint){
+    &--wide{
+      width: 100% !important;
+    }
+  }
+
+  &--sm{
+  }
+
+  &--circle{
+    border-radius: 60px;
+  }
+
+  &--static{
+    @include mq($input-breakpoint){
+      width: auto;
+    }
+  }
+}
+
+.searchform{
+
+  appearance: none;
+  width: auto;
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  &__input{
+    margin-right: rem(-40);
+    padding-right: rem(40);
+  }
+
+  &__submit{
+    background: none;
+    border: none;
+    width: rem(40);
+    @include border-right-radius($input-radius);
+    transition: $transition-time;
+    &:hover{
+      color: $color-primary;
+    }
+  }
+}

@@ -1,0 +1,60 @@
+@charset 'UTF-8';
+
+$bq-background: $background !default;
+$bq-radius: $radius !default;
+$bq-quote-color: #999 !default;
+$bq-cite-color: #999 !default;
+$bq-border: none !default;
+$bq-link-color: null !default;
+
+.blockquote,
+.wpbq{
+  background: $bq-background;
+  border-radius: $bq-radius;
+  border: $bq-border;
+  padding: text-padding() {
+    left: text-padding() * 2 + rem(26);
+  }
+  margin: {
+    top: 0;
+    right: 0;
+    bottom: vr();
+    left: 0;
+  }
+  position: relative;
+
+  &::before{
+    content: '\0201C';
+    color: $bq-quote-color;
+    font: {
+      size: rem(70);
+      family: sans-serif;
+    }
+    position: absolute;
+    left: text-padding();
+    top: text-padding();
+    line-height: 1;
+  }
+
+  &__cite{
+    color: #aaa;
+    display: block;
+    @include vr-font(sm);
+    margin: {
+      top: vr(0.5);
+      bottom: 0;
+    }
+
+    > cite{
+      font: {
+        style: italic;
+        weight: normal;
+      }
+    }
+
+    a{
+      color: $bq-link-color;
+      font-style: inherit;
+    }
+  }
+}

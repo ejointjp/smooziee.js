@@ -1,0 +1,27 @@
+@charset 'UTF-8';
+
+//map $statesの色を取得する
+//infoのbaseカラーを取得するには､info, baseとする
+//$valsの最後が配列の場合､そのmapを参照する｡
+
+@function color($vals...) {
+
+  $last: nth($vals, -1);
+  $array: ();
+  $map: $states;
+
+  @if type-of($last) == map {
+
+    @for $i from 1 through (length($vals) - 1) {
+      $array: append($array, nth($vals, $i), comma);
+    }
+
+    $map: $last;
+  }
+
+  @else {
+    $array: $vals;
+  }
+
+  @return map-deep-get($map, $array...);
+}

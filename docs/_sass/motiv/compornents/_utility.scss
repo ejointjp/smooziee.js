@@ -1,0 +1,22 @@
+.close-btn{
+
+  cursor: pointer;
+  font-weight: bold;
+  line-height: 1;
+  @include font-size(22);
+  transition: 0.2s;
+
+  &::before{
+    content :"\d7";
+  }
+
+  &:hover{
+    filter: opacity(50%);
+  }
+
+  .alert &{
+    position: absolute;
+    right: rem(15);
+    top: rem(10);
+  }
+}

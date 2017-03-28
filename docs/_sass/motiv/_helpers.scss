@@ -1,0 +1,149 @@
+@charset 'UTF-8';
+
+$align-margin: vr() !default;
+
+.container{
+  max-width: $max-width;
+  margin: {
+    right: auto;
+    left: auto;
+  }
+  @include side-gutter();
+
+  .container{
+    padding: {
+      right: 0;
+      left: 0;
+    }
+  }
+
+  &--sm{
+    max-width: $max-width-sm;
+  }
+
+  &--full{
+
+    padding: {
+      right: 0;
+      left: 0;
+    }
+
+    @include mq($max-width){
+      padding: {
+        right: $side-gutter-lg;
+        left: $side-gutter-lg;
+      }
+    }
+  }
+}
+
+.alignleft{
+  float: left;
+  margin: {
+    right: $align-margin;
+    bottom: $align-margin * 0.5;
+  }
+}
+
+.aligncenter{
+  display: block;
+  margin: {
+    right: auto;
+    bottom: $align-margin;
+    left: auto;
+  }
+  text-align: center;
+}
+
+.alignright{
+  float: right;
+  margin: {
+    bottom: $align-margin * 0.5;
+    left: $align-margin;
+  }
+}
+
+.circle{
+  @include circle();
+}
+
+.clearfix::after{
+  @include clearfix();
+}
+
+
+.ex{
+  text-indent: -1em;
+  padding-left: 1em;
+  @include vr-font(sm);
+  color: lighten($font-color, 20%);
+}
+
+//motiv.jsが必要です
+.scroll-x{
+
+  &__view{
+    overflow-x: scroll;
+    -webkit-overflow-scrolling: touch;
+    overflow-scrolling: touch;
+  }
+
+  &__sizer{
+    min-width: 100%;
+    //JavaScriptにて設定
+    //display: table;
+  }
+
+  &__label{
+    @include vr-font(sm);
+    color: $font-color-thin;
+    display: flex;
+  }
+
+  &__left{
+    display: none;
+
+    &::before{
+      content: '< scroll';
+    }
+  }
+
+  &__right{
+    display: none;
+    margin-left: auto;
+
+    &::before{
+      content: 'scroll >';
+    }
+  }
+}
+
+[class$="--mo"],
+[class*="--mo "]{
+  > :first-child{
+    margin-top: 0;
+  }
+  > :last-child{
+    margin-bottom: 0;
+  }
+}
+
+[data-motiv-label]{
+  position: relative;
+
+  &::before{
+    content: attr(data-motiv-label);
+    display: block;
+    color: #999;
+    font-weight: bold;
+    @include vr-font(sm);
+    text-transform: uppercase;
+    margin-bottom: vr(0.5);
+  }
+}
+
+@each $key, $value in $states {
+  [data-motiv-state="#{$key}"]{
+    @include state($key);
+  }
+}

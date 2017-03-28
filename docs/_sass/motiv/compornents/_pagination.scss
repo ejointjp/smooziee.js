@@ -1,0 +1,36 @@
+@charset 'UTF-8';
+
+$pn-background: $background !default;
+$pn-item-background: none !default;
+$pn-color: $color-primary !default;
+$pn-padding: vr(0.5) em(18) !default;
+$pn-radius: $radius !default;
+
+.wp-pagenavi{
+  background: $pn-background;
+  border-radius: $pn-radius;
+  display: flex;
+  overflow: hidden;
+  flex-wrap: wrap;
+
+
+  > span,
+  > a{
+    padding: $pn-padding;
+    background: $pn-item-background;
+    transition: $transition-time;
+  }
+
+  > a{
+    text-decoration: none;
+    &:hover{
+      background: $pn-color;
+      color: white;
+    }
+  }
+
+  > .current{
+    background: $pn-color;
+    color: white;
+  }
+}

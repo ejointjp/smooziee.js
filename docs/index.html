@@ -1,0 +1,44 @@
+---
+layout: default
+---
+
+<div class="jumbotron">
+  <div class="container container--sm">
+    <h1 class="jumbotron__title">{{ site.title }}</h1>
+    <div class="jumbotron__description">{{ site.description }}</div>
+    {% if site.project_repo %}
+      {% capture repo_path %}{{ site.project_repo }}{% endcapture %}
+      {% if site.project_repo == 'auto' %}
+        {% capture repo_path %}{{ site.author.github | prepend: '/'}}{{ site.baseurl | prepend: '/' }}{% endcapture %}
+      {% endif %}
+      <p class="jumbotron__btn">
+        <a class="btn btn--ghost btn--primary" href="https://github.com{{ repo_path | replace: '//', '/' }}"><i class="fa fa-github"></i> View on Github</a>
+      </p>
+    {% endif %}
+  </div>
+</div>
+
+{% if site.front_page_overview %}
+<div class="overview">
+  <div class="container container--sm --mo">
+    {% include front-page-overview.html %}
+  </div>
+</div>
+{% endif %}
+
+<div class="contents front-page">
+  <div class="container container--sm">
+
+    {% for post in site.posts %}
+      <article class="archive">
+        <h2 class="archive__title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h2>
+        <p class="archive__date"><time>{{ post.date | date: '%B %d, %Y' }}</time></p>
+        <div class="archive__excerpt">{{ post.excerpt }}</div>
+        <p class="archive__btn">
+          <a class="btn btn--primary btn--inverse btn--responsive" href="{{ post.url | relative_url }}">Read more</a>
+        </p>
+      </article>
+    {% endfor %}
+
+  </div><!--container-->
+</div><!--main-->

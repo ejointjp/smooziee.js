@@ -1,0 +1,26 @@
+@charset 'UTF-8';
+
+$label-radius: $radius !default;
+
+.label{
+
+  $selector: &;
+  border-radius: $label-radius;
+  background: $color-default;
+  color: white;
+  display: inline-block;
+  font-weight: normal;
+  padding: {
+    right: em(9);
+    left: em(9);
+  }
+
+  @include vr-font(ms(-1, $ratio:$perfect-fourth), $unit: em);
+  @include all-state(label);
+
+  &--inverse{
+
+    @include all-state('label-inverse', $selector);
+    background: white;
+  }
+}

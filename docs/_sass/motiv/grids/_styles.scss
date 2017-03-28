@@ -1,0 +1,67 @@
+@charset 'UTF-8';
+
+*,*::before,*::after{
+  box-sizing: border-box;
+}
+
+img{
+  max-width: 100%;
+}
+
+.row{
+
+  @include row-gutter();
+
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: $grid-gutter;
+
+  &-center{
+    justify-content: center;
+  }
+
+  &-nogutter{
+    @include nogutter();
+
+    > .col,
+    > [class^="col-"],
+    > [class*=" col-"]{
+      @include nogutter();
+      width: 100%;
+    }
+  }
+
+  &-nowrap{
+    flex-wrap: nowrap;
+  }
+
+  &-reverse{
+    flex-direction: row-reverse;
+  }
+
+  &-right{
+    justify-content: flex-end;
+  }
+
+  &-spread{
+    justify-content: space-between;
+  }
+}
+
+.col,
+[class^="col-"],
+[class*=" col-"]{
+  width: calc(100% - #{$grid-gutter});
+  @include col-gutter();
+
+  > .row{
+    margin-bottom: 0;
+  }
+}
+
+@each $size in map-keys($screen-size){
+  @include col-style($size);
+  @if $order {
+    @include order-style($size);
+  }
+}

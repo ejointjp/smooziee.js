@@ -1,0 +1,23 @@
+@charset 'UTF-8';
+
+.media{
+
+  margin-bottom: vr();
+  display: flex;
+
+  &__img{
+    margin-right: vr();
+    flex: 1;
+  }
+
+  &__content{
+    flex: 5;
+  }
+
+  &__title{
+    @include vr-font(lg);
+    font-weight: bold;
+    margin-top: 0;
+    margin-bottom: vr(0.5);
+  }
+}

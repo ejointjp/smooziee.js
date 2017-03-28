@@ -1,0 +1,140 @@
+@charset 'UTF-8';
+
+$nav-color: #555 !default;
+$nav-title-color: $nav-color !default;
+$nav-list-color: $nav-color !default;
+$nav-btn-color: $nav-color !default;
+$nav-background: white !default;
+
+$nav-logo-width: rem(120) !default;
+$nav-logo-width-lg: rem(150) !default;
+
+$nav-padding-y-sm: vr(0.5) !default;
+$nav-padding-y: vr() !default;
+$nav-padding-x: rem(18) !default;
+$nav-padding: $nav-padding-y $nav-padding-x !default;
+
+$nav-font-size: sm !default;
+$nav-breakpoint: $main-breakpoint !default;
+
+.nav{
+
+  background: $nav-background;
+  position: relative;
+  z-index: z-index(nav);
+
+  a{
+    text-decoration: none;
+  }
+
+  &__container{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    @include side-gutter();
+
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  &__brand{
+    display: flex;
+    align-items: center;
+    order: 0;
+    min-height: vr() + $nav-padding-y * 2;
+
+    color: $nav-title-color;
+    padding-left: $side-gutter;
+
+    @include mq($nav-breakpoint){
+      padding-left: 0;
+    }
+  }
+
+  &__logo{
+    width: $nav-logo-width;
+    margin-right: $nav-padding-x;
+
+    @include mq($nav-breakpoint){
+      width: $nav-logo-width-lg;
+    }
+  }
+
+  &__title{
+    font-weight: bold;
+    line-height: 1;
+    color: inherit;
+    margin-right: $nav-padding-x;
+  }
+
+  &__list{
+
+    display: none;
+
+    flex-basis: 100%;
+    order: 2;
+    flex-wrap: wrap;
+    @include reset(list);
+    @include vr-font($nav-font-size);
+
+    @include mq($nav-breakpoint){
+      display: flex !important;
+      flex-basis: auto;
+      margin-left: auto;
+    }
+
+    a{
+      display: block;
+      color: $nav-list-color;
+      padding: $nav-padding-y-sm $side-gutter;
+
+      @include mq($nav-breakpoint){
+        padding: $nav-padding;
+      }
+    }
+  }
+
+  &__btn{
+    order: 1;
+    cursor: pointer;
+    border: none;
+    margin-left: auto;
+    padding: $nav-padding-y-sm $grid-gutter;
+    color: $nav-btn-color;
+
+
+    @include mq($nav-breakpoint){
+      display: none;
+    }
+  }
+
+  &__child,
+  .sub-menu{
+    display: none;
+    margin-left: 1em;
+    background: $nav-background;
+
+    @include mq($nav-breakpoint){
+      margin-left: 0;
+      position: absolute;
+      left: 0;
+      a{
+        padding-top: text-padding();
+        padding-bottom: text-padding();
+      }
+    }
+  }
+
+  &__item,
+  .menu-item{
+
+    position: relative;
+
+    &:hover{
+      .nav__child,
+      .sub-menu{
+        display: block;
+      }
+    }
+  }
+}

@@ -1,0 +1,25 @@
+@charset 'UTF-8';
+
+$card-border-style: null !default;
+$card-border-width: null !default;
+$card-border-color: null !default;
+$card-background: white !default;
+
+.card{
+
+  &__header{
+    text-align: center;
+  }
+
+  &__title{
+    @include vr-font(lg);
+    margin: {
+      bottom: text-padding();
+    }
+  }
+
+  &__body{
+    background: $card-background;
+    padding: text-padding();
+  }
+}

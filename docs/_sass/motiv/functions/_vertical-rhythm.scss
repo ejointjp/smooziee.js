@@ -1,0 +1,23 @@
+@charset 'UTF-8';
+
+//Vertical Rhythm
+@function vr($line: 1, $adjust: 0, $unit: rem){
+
+  $height: $line * $vertical-rhythm-base + $adjust;
+
+  @if $unit == rem {
+    @return rem($height);
+  }
+
+  @else if $unit == em {
+    @return em($height);
+  }
+
+  @else if $unit == px {
+    @return $height;
+  }
+
+  @else {
+    @return $line * $vertical-rhythm-base;
+  }
+}

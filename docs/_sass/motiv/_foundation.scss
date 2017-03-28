@@ -1,0 +1,132 @@
+@charset 'UTF-8';
+
+html{
+  color: $font-color;
+  font-family: $font-sans;
+  @include vr-font($font_unit: px);
+}
+
+h1,
+h2,
+h3,
+h4{
+  letter-spacing: -1px;;
+}
+
+h1{
+  @include vr-font(ms(3));
+  margin-top: vr(2);
+  margin-bottom: vr(1);
+
+  @include mq(){
+    @include vr-font(ms(4));
+  }
+}
+
+h2{
+  @include vr-font(ms(2));
+  margin-top: vr(2);
+  margin-bottom: vr(1);
+
+  @include mq(){
+    @include vr-font(ms(3));
+  }
+}
+
+h3{
+  @include vr-font(ms(1));
+  margin-top: vr(2);
+  margin-bottom: vr(1);
+
+  @include mq(){
+    @include vr-font(ms(2));
+  }
+}
+
+h4{
+  @include vr-font(ms(0));
+  margin-top: vr(2);
+  margin-bottom: vr(1);
+
+  @include mq(){
+    @include vr-font(ms(1));
+  }
+}
+
+
+p{
+  margin-top: 0;
+  margin-bottom: vr();
+}
+
+a{
+  color: $link-color;
+  text-decoration: inherit;
+
+  &:hover{
+    text-decoration: underline;
+  }
+}
+
+q{
+  font-style: italic;
+  &::before,
+  &::after{
+    content: '"';
+  }
+}
+
+ul,
+ol,
+dl{
+  margin-top: 0;
+  margin-bottom: vr();
+}
+
+li{
+  margin-bottom: vr(0.5);
+}
+
+dt{
+  font-weight: bold;
+  dt + &{
+    margin-top: vr(0.5);
+  }
+  dd + &{
+    margin-top: vr();
+  }
+}
+
+dd{
+  margin-left: 0;
+  dt ~ &{
+    margin-top: vr(0.5);
+  }
+}
+
+img,
+picture{
+  max-width: 100%;
+  vertical-align: bottom;
+}
+
+blockquote{
+  margin-top: 0;
+  margin-bottom: vr();
+}
+
+figure{
+  margin: 0 0 vr() 0;
+}
+
+figcaption{
+}
+
+hr{
+  border: none;
+  border-top: $border;
+  display: block;
+  margin-top: vr();
+  margin-bottom: vr();
+  width: 60%;
+}

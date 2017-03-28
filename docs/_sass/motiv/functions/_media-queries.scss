@@ -1,0 +1,37 @@
+@charset 'UTF-8';
+
+@function min-width($size){
+
+  $return: '';
+
+  @if $size != 0 {
+    $return: ' and (min-width: #{$size})';
+  }
+
+  @return $return;
+}
+
+@function max-width($size){
+
+  $return: '';
+
+  @if $size != 0 {
+    $return: ' and (max-width: #{$size})';
+  }
+
+  @return $return;
+}
+
+@function queries($min, $max: 0){
+
+  $return: '';
+
+  @if $min != 0 or $max != 0 {
+    $return: ' screen#{min-width($min)}#{max-width($max)}';
+  }
+
+  @else {
+    @warn '@function media-queries: Media Queriesが不正です｡$min, $maxの値が両方0になっています｡';
+  }
+  @return $return;
+}

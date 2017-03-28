@@ -1,0 +1,29 @@
+title: smooziee.js
+description: >
+  ページ内リンクだけでなく、サイト内の他ページへのリンクでもOK！高機能スムーススクロールjQueryプラグイン
+
+baseurl: /smooziee.js
+url: https://ejointjp.github.io
+
+author:
+  name: e-JOINT.jp
+  email:
+  github: ejointjp
+  twitter: ejointjp
+
+project_repo: auto # https://github.com の後のリポジトリページのパス｡「'auto'」に設定すると､/{{ author.github }}/{{ site.baseurl }}となります｡
+google_analytics_tracking_id:
+front_page_overview: true
+display_home_in_menu: false
+default_sidebar: tocjs # default ''
+
+highlighter: rouge
+
+permalink: pretty
+
+sass:
+  style: compressed
+
+gems:
+  - jekyll-feed
+  - jekyll-sitemap

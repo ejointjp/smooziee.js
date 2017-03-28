@@ -1,0 +1,9 @@
+@charset 'UTF-8';
+
+@function text-padding($adjust: 0){
+  @return vr(0.5, $adjust);
+}
+
+@function text-padding-sm($adjust: 0){
+  @return vr(0.25, $adjust);
+}

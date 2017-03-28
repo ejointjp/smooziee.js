@@ -1,0 +1,175 @@
+@charset 'UTF-8';
+
+$table-border-style: $border-style !default;
+$table-border-width: $border-width !default;
+$table-border-color: $border-color !default;
+$table-padding: text-padding() !default;
+$table-padding-minus1: text-padding($table-border-width * -1) !default;
+$table-padding-sm: text-padding-sm() !default;
+$table-padding-sm-minus1: text-padding-sm($table-border-width * -1) !default;
+$table-border: $border;
+$table-background: rgba(gray, 0.08) !default;
+$table-radius: $radius !default;
+$table-font-size: $base-font-size !default;
+$table-breakpoint: $main-breakpoint !default;
+
+table{
+  width: 100%;
+  @include vr-font(sm);
+  margin-bottom: vr();
+
+  &:not(.table--sm){
+    @include mq($table-breakpoint){
+      th,
+      td{
+        @include vr-font($table-font-size);
+        padding: $table-padding;
+      }
+    }
+  }
+}
+
+caption{
+  text-align: left;
+  @include vr-font(sm);
+  margin-bottom: vr(0.5);
+}
+
+th{
+  text-align: left;
+}
+
+th,
+td{
+  padding: $table-padding-sm;
+}
+
+
+.table{
+
+  $selector: &;
+
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: $table-radius;
+  overflow: hidden;
+
+  & > thead{
+    th,
+    td{
+      border-bottom: $table-border;
+    }
+  }
+
+  & > tfoot + tbody,
+  & > tbody:not(:last-child){
+    & > tr:last-child{
+      & > th,
+      & > td{
+        border-bottom: $table-border;
+      }
+    }
+  }
+
+  &--bordered{
+
+    border: $border;
+    margin-bottom: vr(1, -1);
+
+    th,
+    td{
+      padding: $table-padding-sm-minus1;
+
+      &:not(:first-child){
+        border-left: $table-border;
+      }
+    }
+
+    tr:not(:first-child){
+      & > th,
+      & > td{
+        border-top: $table-border;
+      }
+    }
+
+    & > thead + tbody,
+    & > thead + tfoot + tbody,
+    & > tfoot{
+      th,
+      td{
+        border-top: $table-border;
+      }
+    }
+
+    &:not(.table--sm){
+      @include mq($table-breakpoint){
+        th,
+        td{
+          padding: $table-padding-minus1;
+        }
+      }
+    }
+  }
+
+  &--striped{
+
+    & > tbody{
+      & > tr:nth-child(odd){
+        background: $table-background;
+      }
+    }
+  }
+
+  &--responsive{
+
+    @include mq(max){
+
+      display: block;
+
+      > caption,
+      > thead,
+      > tbody,
+      > tfoot,
+      tr,
+      th,
+      td
+      {
+        display: block;
+      }
+
+      tr{
+        background: transparent;
+      }
+
+      th{
+        background: $table-background;
+      }
+
+      td{
+        background: transparent;
+      }
+
+      &#{$selector}--bordered{
+
+        tr:first-child{
+          & > td{
+            border-top: $table-border;
+          }
+        }
+
+        th,
+        td{
+          border-left: none;
+        }
+      }
+
+      &#{$selector}--striped{
+        tbody{
+          & > tr{
+            background: transparent;
+          }
+        }
+      }
+    }
+  }
+}

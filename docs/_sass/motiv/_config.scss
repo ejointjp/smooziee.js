@@ -1,0 +1,241 @@
+@charset 'UTF-8';
+
+/////////////////////////////////////////////////////////////////////////////////////
+
+// Base Settings
+
+/////////////////////////////////////////////////////////////////////////////////////
+
+//Modular Scale およびVertical Rhythmの値として使われます｡
+
+$modular-scale-base: 16px !default;
+$modular-scale-ratio: $minor-third !default;
+$vertical-rhythm-base: 24px !default;
+
+$base-font-size: $modular-scale-base !default;
+
+//Modular Scaleのサイズに使われます｡例: ms(sm);
+$size-alias: (
+  xxxs: -4,
+  xxs: -3,
+  xs: -2,
+  sm: -1,
+  md: 0,
+  lg: 1,
+  xl: 2,
+  xxl: 3,
+  xxxl: 4
+) !default;
+
+/////////////////////////////////////////////////////////////////////////////////////
+
+// Layout Settings
+
+/////////////////////////////////////////////////////////////////////////////////////
+
+//スクリーンサイズ（ブレイクポイント）の設定
+//キーの名前にハイフン（-）､「max」「max-width」は使えません｡
+$screen-size: (
+  xs: 0,
+  sm: 540,
+  md: 750,
+  lg: 900,
+  xl: 1280
+) !default;
+
+// メインのブレイクポイントを指定
+$main-breakpoint: lg !default;
+
+// グリッド数、カラムの間隔の設定
+$grid-columns: 12 !default;
+$grid-gutter: rem($vertical-rhythm-base) !default;
+
+//エイリアスの使用 true, substitute, false
+// true … エイリアスを使う（元のスクリーンサイズのクラスと併用する）
+// substitute … 代替（元のスクリーンサイズのクラスは削除しエイリアスのみを使う）
+// false … エイリアスを使わない
+$alias: true !default;
+
+//.orderクラスを使う true, false
+$order: true !default;
+
+
+/////////////////////////////////////////////////////////////////////////////////////
+
+// Max Width
+
+/////////////////////////////////////////////////////////////////////////////////////
+
+$max-width: if(map-has-key($screen-size, xl), screen-size(xl), 1280px) !default;
+$max-width-sm: if(map-has-key($screen-size, lg), screen-size(lg), 900px) !default;
+
+
+/////////////////////////////////////////////////////////////////////////////////////
+
+// Base Colors
+
+/////////////////////////////////////////////////////////////////////////////////////
+
+$blue: #3A8EBF !default;
+$blue-light: #6FC9D8 !default;
+$navy: #323844 !default;
+$green: #50AA8D !default;
+$yellow: #F0AD4E !default;
+$red: #E95a54 !default;
+$purple: #654A8D !default;
+$orange: #F38546 !default;
+$pink: #ed89b8 !default;
+
+$gray-ex-light: #f8f8f8 !default;
+$gray-light: #ddd !default;
+$gray: #888 !default;
+$gray-dark: #333 !default;
+
+$color-twitter: #43a7e1 !default;
+$color-facebook: #3d5f9d !default;
+$color-google-plus: #dd4a39 !default;
+$color-pocket: #f14154 !default;
+$color-feedly: #8ABD50 !default;
+$color-hatebu: #318fdf !default;
+$color-skype: #00AFF0 !default;
+$color-instagram: #125688 !default;
+$color-line: #00C300 !default;
+
+$color-atom: #d7d9dd !default;
+$color-atom-background: #292C32 !default;
+
+/////////////////////////////////////////////////////////////////////////////////////
+
+// Fonts
+
+/////////////////////////////////////////////////////////////////////////////////////
+
+//フォントサイズ､line-heightの設定はBase Settingsの項目にあります｡
+
+$font-sans: 'Open Sans', sans-serif !default;
+$font-serif: serif !default;
+$font-mono: Monaco, 'Courier New', monospace !default;
+$font-family: $font-sans !default;
+
+$font-color: $gray-dark !default;
+$font-color-thin: $gray !default;
+
+//アンカーテキスト
+$link-color: $blue !default;
+$link-color-hover: lighten($link-color, 20%) !default;
+
+
+/////////////////////////////////////////////////////////////////////////////////////
+
+// Decorations
+
+/////////////////////////////////////////////////////////////////////////////////////
+
+//背景色
+$background: $gray-ex-light !default;
+
+//border
+$border-width: 1px !default;
+$border-style: solid !default;
+$border-color: $gray-light !default;
+$border: $border-width $border-style $border-color !default;
+
+//radius
+$radius: 3px !default;
+
+
+/////////////////////////////////////////////////////////////////////////////////////
+
+// States Colors
+
+/////////////////////////////////////////////////////////////////////////////////////
+
+$color-default: $gray !default;
+$color-primary: $color-twitter !default; //サイトのテーマカラーを設定
+$color-secondary: $color-instagram !default; //サイトのサブカラーを設定
+
+$color-info: $blue-light !default;
+$color-success: $green !default;
+$color-warning: $yellow !default;
+$color-danger: $red !default;
+
+
+$states: (
+  default: (
+    base: $color-default,
+    font: $font-color,
+    border: $border-color,
+    background: $background
+  ),
+  primary: (
+    base: $color-primary
+  ),
+  secondary: (
+    base: $color-secondary
+  ),
+  info: (
+    base: $color-info,
+    font: darken($color-info, 30%),
+    border: lighten($color-info, 20%),
+    background: lighten($color-info, 30%)
+  ),
+  success: (
+    base: $color-success,
+    font: darken($color-success, 20%),
+    border: lighten($color-success, 30%),
+    background: lighten($color-success, 42%)
+  ),
+  warning: (
+    base: $color-warning,
+    font: darken($color-warning, 32%),
+    border: lighten($color-warning, 20%),
+    background: lighten($color-warning, 33%)
+  ),
+  danger: (
+    base: $color-danger,
+    font: darken($color-danger, 20%),
+    border: lighten($color-danger, 26%),
+    background: lighten($color-danger, 34%)
+  ),
+  disabled: (
+    base: #999,
+    font: #bbb,
+    border: $border-color
+  )
+) !default;
+
+
+/////////////////////////////////////////////////////////////////////////////////////
+
+// Margins
+
+/////////////////////////////////////////////////////////////////////////////////////
+
+$pad: 2.5% !default;
+
+//ウィンドウ両サイドの余白
+$side-gutter: $vertical-rhythm-base !default;
+$side-gutter-lg: $vertical-rhythm-base * 2 !default;
+
+
+/////////////////////////////////////////////////////////////////////////////////////
+
+// Transition
+
+/////////////////////////////////////////////////////////////////////////////////////
+
+$transition-time: 0.3s !default;
+
+/////////////////////////////////////////////////////////////////////////////////////
+
+// Headings
+
+/////////////////////////////////////////////////////////////////////////////////////
+
+$z-index: (
+  background: -100,
+  shadow: -1,
+  base: 1,
+  nav: 100,
+  modal: 200
+) !default;

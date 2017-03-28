@@ -1,0 +1,5 @@
+@charset 'UTF-8';
+
+@function z-index($key) {
+  @return map-get($z-index, $key);
+}

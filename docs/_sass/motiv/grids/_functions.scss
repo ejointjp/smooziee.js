@@ -1,0 +1,50 @@
+@charset 'UTF-8';
+
+// 2つの文字列をハイフンで結ぶ
+@function tie($basename, $suffix: false){
+  @if $suffix {
+    @return #{$basename}-#{$suffix};
+  }
+  @else {
+    @return $basename;
+  }
+}
+
+// カラムサイズと間隔からcolの横幅を算出する
+@function col-width($i, $grid, $gutter: 0){
+  $contentWidth: 100% * ($i / $grid);
+
+  @if $gutter == 0 {
+    @return $contentWidth;
+  } @else {
+    @if unit($gutter) == '%' {
+      @return $contentWidth - $gutter;
+    } @else {
+      @return calc(#{$contentWidth} - #{$gutter});
+    }
+  }
+}
+
+// 基準ブレイクポイントに設定したサイズのクラス名にエイリアス（.col）を追加する
+@function classname-alias($base-classname, $size){
+  @if $main-breakpoint == $size {
+    @if $alias {
+      @if $alias == substitute {
+        @return $base-classname;
+      } @else {
+        @return $base-classname + ', ' + tie($base-classname, $size);
+      }
+    }
+  }@else{
+    @return tie($base-classname, $size);
+  }
+}
+
+//ベースとなるクラス名とサイズ名からセレクタを出力する
+@function selector($base-classname, $size){
+  @if $alias {
+    @return classname-alias($base-classname, $size);
+  }@else{
+    @return tie($base-classname, $size);
+  }
+}
