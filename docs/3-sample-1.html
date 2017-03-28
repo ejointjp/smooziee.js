@@ -13,6 +13,7 @@ template: 2-columns
 <p><a href="#link00">#link00</a></p>
 <p><a href="#link01">#link01</a></p>
 <p><a href="#link02">#link02</a></p>
+<p><a href="#link100">#link100</a>（存在しないID）</p>
 <p><a href="{{ '/sample/' | relative_url }}#link01">{{ '/sample/' | relative_url }}#link01</a></p>
 <p><a href="{{ '/sample/index.html' | relative_url }}#link01">{{ '/sample/index.html' | relative_url }}#link01</a></p>
 <p><a href="index.html#link01">index.html#link01</a></p>
@@ -25,6 +26,7 @@ template: 2-columns
 <p><a href="{{ '/sample/dir/' | relative_url }}#link02">{{ '/sample/dir/' | relative_url }}#link02</a></p>
 
 <p><a href="dir/#link02">dir/#link02</a></p>
+<p><a href="{{ page.url | absolute_url }}#link01">{{ page.url | absolute_url }}#link01</a></p>
 
 <p><a href="{{ '/sample/?test=test' | relative_url }}#link01">{{ '/sample/?test=test' | relative_url }}#link01</a></p>
 <p><a href="{{ '/sample/?test=test' | relative_url }}#link02">{{ '/sample/?test=test' | relative_url }}#link02</a></p>

@@ -76,11 +76,11 @@ $(window).on('load', function()){
       <p>ハッシュタグのついたaタグをクリックした時に、URLをどう変更するかを指定します。</p>
       <dl>
         <dt><code>hash</code></dt>
-        <dd>ハッシュタグを付与します。<code>http://example.com/#link</code></dd>
+        <dd>通常のページ内リンクと同じくハッシュタグを付与します。<code>http://example.com/#link</code></dd>
         <dt><code>none</code></dt>
-        <dd>何も付与しません。<code>http://example.com</code></dd>
+        <dd>ページ内リンクを行っても、ハッシュタグを付与しません。<code>http://example.com</code></dd>
         <dt><code>default</code></dt>
-        <dd>他ページへのリンクをした際に、ハッシュタグが変換されますが、そのままの状態となります。<code>http://example.com/?scroll_id=link</code></dd>
+        <dd>他ページへのリンクをした際にはハッシュタグが変換されますが、変換されたそのままの状態でアドレスバーに表示されます。<code>http://example.com/?scroll_id=link</code></dd>
         <dd>また、ページ内リンクの際は何も付与しません。</dd>
       </dl>
     </td>
