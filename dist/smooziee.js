@@ -30,7 +30,7 @@
       //ターゲットが存在する場合スクロールを実行
       if(target.length !== 0){
 
-        var position = target.length ? target.offset().top + options.offset : null;
+        var position = target.offset().top + options.offset;
 
         $('html, body').animate({
           scrollTop: position
@@ -155,7 +155,7 @@
       }
     });
 
-    //URLにスクロールのターゲットが指定されていればスクロールを実行、なければ何もしない
+    //URLにスクロールのターゲットが指定されていればスクロール
     if(options.otherPageScroll && scrollVal !== ''){
       scroll(scrollVal);
     }
