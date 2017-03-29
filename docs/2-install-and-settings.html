@@ -16,10 +16,10 @@ permalink: /install-and-settings/
 <script src="path/to/smooziee.js"></script>
 {% endhighlight %}
 
-<p><code>smooziee</code> を実行します。window on load にした方がよいかもしれません。</p>
+<p><code>smooziee</code> を実行します。</p>
 
 {% highlight js %}
-$(window).on('load', function()){
+$(function()){
   $.smooziee();
 });
 {% endhighlight %}
@@ -29,15 +29,15 @@ $(window).on('load', function()){
 <p>オプションについては以下のとおりです。</p>
 
 {% highlight js %}
-$(window).on('load', function()){
+$(function()){
   $.smooziee({
-    ignore: '.no-scroll', //スクロールを除外するクラス
-    offset: -20, //移動先のオフセット
-    otherPageScroll: true, //他ページへのリンクの際のスクロール
-    scrollKey: 'scroll_id', //ハッシュタグの代わりに使用するクエリのキー
-    speed: 1000, //スクロール開始から終了までの時間
-    urlHistory: 'replace', //URL書き換え時にhistoryを追加するか上書きするか
-    urlParam: 'hash' //URLの書き換え hash, none, default
+    ignore: '.no-scroll', // スクロールを除外するクラス
+    offset: -20, // 移動先のオフセット
+    otherPageScroll: true, // 他ページへのリンクの際のスクロール
+    scrollKey: 'scroll_id', // ハッシュタグの代わりに使用するクエリのキー
+    speed: 1000, // スクロール開始から終了までの時間
+    urlHistory: 'replace', // URL書き換え時にhistoryを追加するか上書きするか
+    urlParam: 'hash' // URLの書き換え hash, none, default
   });
 });
 {% endhighlight %}
