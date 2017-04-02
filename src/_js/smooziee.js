@@ -7,11 +7,11 @@
  */
 
 (function (factory) {
- if (typeof module === "object" && typeof module.exports === "object") {
-   module.exports = factory(require("jquery"), window, document);
- } else {
-   factory(jQuery, window, document);
- }
+  if (typeof module === "object" && typeof module.exports === "object") {
+    module.exports = factory(require("jquery"), window, document);
+  } else {
+    factory(jQuery, window, document);
+  }
 }(function($, window, document, undefined){
 
   'use srtict';
