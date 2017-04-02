@@ -1,4 +1,20 @@
-(function($){
+/*!
+ * smooziee.js v0.1.0
+ *
+ * Copyright 2017 e-JOINT.jp
+ * https://ejointjp.github.io/smooziee.js
+ * MIT license
+ */
+
+(function (factory) {
+ if (typeof module === "object" && typeof module.exports === "object") {
+   module.exports = factory(require("jquery"), window, document);
+ } else {
+   factory(jQuery, window, document);
+ }
+}(function($, window, document, undefined){
+
+  'use srtict';
 
   $.smooziee = function(options){
 
@@ -164,4 +180,4 @@
 
     return this;
   };
-})(jQuery);
+}));

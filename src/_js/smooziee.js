@@ -1,20 +1,36 @@
-(function($){
+/*!
+ * smooziee.js v0.2.0
+ *
+ * Copyright 2017 e-JOINT.jp
+ * https://ejointjp.github.io/smooziee.js
+ * MIT license
+ */
+
+(function (factory) {
+ if (typeof module === "object" && typeof module.exports === "object") {
+   module.exports = factory(require("jquery"), window, document);
+ } else {
+   factory(jQuery, window, document);
+ }
+}(function($, window, document, undefined){
+
+  'use srtict';
 
   $.smooziee = function(options){
 
     options = $.extend({
-      ignore: '.no-scroll', // スクロールを除外するクラス
-      offset: -24, // 移動先のオフセット
-      otherPageScroll: true, // 他ページへのリンクの際のスクロール
-      scrollKey: 'scroll_id', // ハッシュタグの代わりに使用するクエリのキー
-      speed: 1000, // スクロール開始から終了までの時間
-      urlHistory: 'replace', // URL書き換え時にhistoryを追加するか上書きするか
-      urlParam: 'hash' // URLの書き換え hash, none, default
+      ignore: '.no-scroll', // Ignore a tag of this class
+      offset: -24, // Scroll target point offset
+      otherPageScroll: true, // Scroll through links to other pages
+      scrollKey: 'scroll_id', // The key used for scrolling
+      speed: 1000, // Scroll speed
+      urlHistory: 'replace', // replace or push
+      urlParam: 'hash' // hash or none or default
     }, options);
 
-    var scrollVal = ''; // URLに含まれるスクロールに使われる値
+    var scrollVal = '';
     var urlSplit = location.href.split('#');
-    var url = urlSplit[0]; // ページURLのハッシュを除いた部分
+    var url = urlSplit[0];
 
     // URLにスクロールキーが含まれているか判別
     if(url.indexOf(options.scrollKey) !== -1){
@@ -164,4 +180,4 @@
 
     return this;
   };
-})(jQuery);
+}));
