@@ -1,5 +1,5 @@
 /*!
- * smooziee.js v0.2.0
+ * smooziee.js v0.2.1
  *
  * Copyright 2017 e-JOINT.jp
  * https://ejointjp.github.io/smooziee.js

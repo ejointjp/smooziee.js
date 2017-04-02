@@ -1,6 +1,6 @@
 {
   "name": "smooziee.js",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "It is a smooth scroll jQuery plug-in that scrolls not only in-page links but also links to other pages in the site.",
   "main": "./dist/smooziee.js",
   "dependencies": {
